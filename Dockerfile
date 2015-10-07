@@ -19,16 +19,21 @@ RUN apt-get -qq update \
  && ( yes 'Yes, do as I say!' | apt-get autoremove --purge libicu. systemd isc-dhcp-c. libcurl3-gnutls python. udev e2fs. .krb. .ldap. .devmapper. ) \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /opt/steam \
+RUN mkdir -p /opt/steam /var/lib/steam \
  && adduser --disabled-password --no-create-home --gecos 'Steam Client' --home /opt/steam steam \
  && curl --silent --show-error --fail --location --header "Accept: application/gzip, application/octet-stream" -o - \
         https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
     | tar --no-same-owner -xzf - -C /opt/steam/ \
- && chown -R steam:steam /opt/steam \
+ && chown -R steam:steam /opt/steam /var/lib/steam \
  && chmod 0755 /opt/steam/linux32/steamcmd
 
-# EXPOSE 5000 5222 5269 5280 5281 5347
-# VOLUME /var/lib/prosody /etc/prosody/conf.d /etc/prosody/certs
+USER steam
+WORKDIR /var/lib/steam
+VOLUME /opt/steam/Steam/logs
 
-# ENTRYPOINT ["/bin/bash", "/etc/service/prosody/run"]
+# this bootstraps the Steam client
+RUN /opt/steam/steamcmd.sh +login anonymous validate +quit
+
+# and this triggers an update
+ONBUILD RUN /opt/steam/steamcmd.sh +login anonymous validate +quit
 
