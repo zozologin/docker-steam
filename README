@@ -1,0 +1,19 @@
+base image with Steam
+=====================
+
+Please remember that
+you don't need to provide your personal credentials to download a dedicated server
+if "login anonymous" works!
+
+You most probably want to use it like this on the console:
+
+```bash
+/opt/steam/steamcmd.sh +login anonymous +force_install_dir /var/lib/steam/ark-dedicated +app_update 376030 validate +quit
+
+# then run the game
+cd /var/lib/steam/ark-dedicated/ShooterGame/Binaries/Linux/
+./ShooterGameServer TheIsland?listen?SessionName=<SERVERNAME>?ServerAdminPassword=<ADMINPASSWORT> -server -log
+```
+
+It is a good idea to store folder ```/var/lib/steam``` outside the Docker container.
+
