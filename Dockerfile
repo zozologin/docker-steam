@@ -11,6 +11,7 @@ RUN apt-get -qq update \
  && printf 'Package: *\nPin: origin "s.blitznote.com"\nPin-Priority: 510\n' > /etc/apt/preferences.d/prefer-blitznote \
  && apt-get -qq update \
  && apt-get install -y --force-yes curl ca-certificates \
+ && apt-get install -y lib32stdc++6 \
  && printf "\tif [[ \${EUID} == 0 ]] ; then\n\t\tPS1='\\[\\\\033[01;31m\\]\\h\\[\\\\033[01;96m\\] \\W \\$\\[\\\\033[00m\\] '\n\telse\n\t\tPS1='\\[\\\\033[01;32m\\]\\u@\\h\\[\\\\033[01;96m\\] \\w \\$\\[\\\\033[00m\\] '\n\tfi\n" >> /etc/bash.bashrc \
  && sed -i -e "/color_prompt.*then/,/fi/{N;d}" /root/.bashrc \
  && printf 'alias dir="ls -alh --color"\n' >> /etc/bash.bashrc \
@@ -23,7 +24,8 @@ RUN mkdir -p /opt/steam \
  && curl --silent --show-error --fail --location --header "Accept: application/gzip, application/octet-stream" -o - \
         https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
     | tar --no-same-owner -xzf - -C /opt/steam/ \
- && chown -R steam:steam /opt/steam
+ && chown -R steam:steam /opt/steam \
+ && chmod 0755 /opt/steam/linux32/steamcmd
 
 # EXPOSE 5000 5222 5269 5280 5281 5347
 # VOLUME /var/lib/prosody /etc/prosody/conf.d /etc/prosody/certs
