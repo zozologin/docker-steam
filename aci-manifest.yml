@@ -1,0 +1,30 @@
+name: blitznote.com/aci/steamcmd:1
+
+aci:
+  app:
+    exec:
+      - /opt/steam/steamcmd.sh
+    user: 1000
+    group: 1000
+    workingDirectory: /var/lib/steam
+    mountPoints:
+      - name: gameserver
+        path: /var/lib/steam
+      - name: logdir
+        path: /opt/steam/Steam/logs
+    isolators:
+      - name: resource/memory
+        value: {request: 40M, limit: 96M}
+      - name: resource/cpu
+        value: {request: 100m, limit: 1000m}
+  dependencies:
+    - 'blitznote.com/ubuntu:16.04'
+  annotations:
+    - name: authors
+      value: 'W. Mark Kubacki <wmark@hurrikane.de>'
+    - name: org.label-schema.vcs-url
+      value: 'https://github.com/wmark/docker-steam'
+    - name: homepage
+      value: 'https://developer.valvesoftware.com/wiki/SteamCMD'
+    - name: documentation
+      value: 'https://developer.valvesoftware.com/wiki/SteamCMD'

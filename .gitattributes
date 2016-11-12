@@ -1,5 +1,9 @@
-* text eol=lf
+*.yml      text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+.git*      text eol=auto core.whitespace whitespace=trailing-space
 
-*.md text=auto
-README text=auto
+*.bash     text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+*.bats     text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
+*.sh       text eol=lf core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
 
+*.manifest text=auto
+*.md       text eol=auto core.whitespace whitespace=tab-in-indent,trailing-space,tabwidth=2
