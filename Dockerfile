@@ -1,14 +1,13 @@
 # Base image for Docker with the Steam client.
-#
 
-FROM		blitznote/debootstrap-amd64:16.04
-MAINTAINER	W. Mark Kubacki <wmark@hurrikane.de>
+FROM blitznote/debootstrap-amd64:16.04
+MAINTAINER W. Mark Kubacki <wmark@hurrikane.de>
+LABEL org.label-schema.vendor="W. Mark Kubacki" \
+      org.label-schema.name="steamcmd packaged" \
+      org.label-schema.vcs-type="git" \
+      org.label-schema.vcs-url="https://github.com/wmark/docker-steam"
 
-RUN printf "deb [ trusted=yes arch=amd64 ] https://s.blitznote.com/debs/ubuntu/amd64/ all/" > /etc/apt/sources.list.d/blitznote.list \
- && printf 'Package: *\nPin: origin "s.blitznote.com"\nPin-Priority: 510\n' > /etc/apt/preferences.d/prefer-blitznote
-
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get -qq update \
+RUN apt-get -q update \
  && apt-get -y install lib32stdc++6 libcurl3 \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
