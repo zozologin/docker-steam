@@ -1,4 +1,4 @@
-name: blitznote.com/aci/steamcmd:1
+name: blitznote.com/aci/steamcmd:{{.steamcmd.version}}
 
 aci:
   app:
