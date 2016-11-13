@@ -45,12 +45,16 @@ The default implied user and group is `--user=1000 --group=1000`.
 If you want to install games using a different user or group, then adjust the target directory's ownership as well.
 
 ```bash
-mkdir -p /var/lib/steam
+mkdir -p /var/lib/steam/logs
 chown 1000:1000 /var/lib/steam
 chattr +C /var/lib/steam       # optional
 
+# I've used rkt version 1.19.0 here. Replace it with yours.
+
 sudo rkt run --interactive \
   --volume gameserver,kind=host,source=/var/lib/steam \
+  --volume logdir,kind=host,source=/var/lib/steam/logs \
+  --stage1-name=coreos.com/rkt/stage1-fly:1.19.0 \
   blitznote.com/aci/steamcmd:1 \
     -- +login anonymous \
     +force_install_dir /var/lib/steam/csgo \
