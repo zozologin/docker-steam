@@ -13,10 +13,12 @@ aci:
       - name: logdir
         path: /opt/steam/Steam/logs
     isolators:
+      # stage1=fly does not use this
+      # The downloader is surprisingly resource hungry.
       - name: resource/memory
-        value: {request: 40M, limit: 96M}
+        value: {request: 280M, limit: 360M}
       - name: resource/cpu
-        value: {request: 100m, limit: 1000m}
+        value: {request: 1250m, limit: 1800m}
   dependencies:
     - 'blitznote.com/ubuntu:16.04'
   annotations:
