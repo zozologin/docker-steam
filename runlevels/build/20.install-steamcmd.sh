@@ -5,7 +5,7 @@ isLevelEnabled "debug" && set -x
 
 # Needed by steamcmd's contents.
 apt-get -q update
-apt-get -y install lib32stdc++6 libcurl3 curl runit
+apt-get -y install lib32stdc++6 libcurl3 libcurl3-boringssl
 
 echo_green "Now comes steamcmd itself."
 mkdir -p /opt/steam /var/lib/steam

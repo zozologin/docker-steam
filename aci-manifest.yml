@@ -30,3 +30,11 @@ aci:
       value: 'https://developer.valvesoftware.com/wiki/SteamCMD'
     - name: documentation
       value: 'https://developer.valvesoftware.com/wiki/SteamCMD'
+    - name: build-date
+      value: {{.steamcmd.date}}
+
+build:
+  exclude:
+    - /etc/resolv.conf
+    - /etc/update-motd.d/*
+    - /var/cache/ldconfig
