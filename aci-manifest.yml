@@ -35,6 +35,10 @@ aci:
 
 build:
   exclude:
+    - /etc/*-
     - /etc/resolv.conf
     - /etc/update-motd.d/*
-    - /var/cache/ldconfig
+    - /tmp
+    - /usr/share
+    - /var/cache
+    - /var/log
