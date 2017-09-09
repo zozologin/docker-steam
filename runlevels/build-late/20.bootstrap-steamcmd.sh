@@ -11,6 +11,8 @@ cd /opt/steam
 chpst -u steam -- \
 /opt/steam/steamcmd.sh +login anonymous validate +quit
 
+chmod 0755 /opt/steam/*.sh
+
 # Gets the client's version so we can identify it for Valve to properly report errors.
 version=$(</opt/steam/package/steam_cmd_linux.manifest grep -m 1 -A 3 -F '"linux"' | grep -F version | awk '{print $2}' | tr -d -c '0-9.')
 echo_purple "This is steamcmd version: ${version}"
