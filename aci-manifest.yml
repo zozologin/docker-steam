@@ -20,7 +20,7 @@ aci:
       - name: resource/cpu
         value: {request: 1250m, limit: 1800m}
   dependencies:
-    - 'blitznote.com/ubuntu:16.04'
+    - 'blitznote.com/ubuntu:17.10'
   annotations:
     - name: authors
       value: 'W. Mark Kubacki <wmark@hurrikane.de>'
