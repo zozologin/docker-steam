@@ -1,4 +1,4 @@
-base image with Steam
+base image with Steam by satyabrat padhi
 =====================
 
 **steamcmd** ready to download and run stuff inside a container.
